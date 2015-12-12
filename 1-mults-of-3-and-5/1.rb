@@ -10,3 +10,5 @@ multiples = []
 end
 
 p multiples.reduce(:+)
+
+# => 234168
