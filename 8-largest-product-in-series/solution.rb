@@ -13,7 +13,7 @@ really_big_array.map! { |char| char.to_i }
 
 highest_product = 0
 
-(0..really_big_array.length - 14).each do |index|
+(0..really_big_array.length - 13).each do |index|
   sub_array = really_big_array[index..index + 12]
   product = sub_array.inject(1) {|prod, char| prod * char}
   highest_product = product if product > highest_product
