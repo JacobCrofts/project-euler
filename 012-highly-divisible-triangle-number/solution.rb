@@ -22,7 +22,6 @@ require 'prime'
 
 def prime_factors(integer)
   return [integer] if integer.prime?
-  return nil if integer == 1
   factors = []
   counter = 2
   until integer % counter == 0
@@ -46,9 +45,6 @@ def nth_triangle_number(n)
   (1..n).reduce(:+)
 end
 
-# p nth_triangle_number(12375)
-# p number_of_divisors(76564125)
-
 n = 2
 until number_of_divisors(nth_triangle_number(n)) > 500
   n += 1
@@ -64,8 +60,7 @@ p solution
 # This takes about 5 seconds to run, so I will try to refactor it later
 # for performance. My original approach was to iterate through (1..integer)
 # and simply count the number of divisors in that range using modulo. It
-# works fine with small numbers, but with larger ones we need a different
-# approach.
+# works fine with small numbers, but with larger ones it takes too long to run.
 
 # The trick here, and I think this puzzle is unsolvable without it, is that
 # if a number's prime factors are listed like this: a^r * b^s * ..., then the
