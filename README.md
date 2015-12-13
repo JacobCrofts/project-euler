@@ -1,6 +1,6 @@
 # Project Euler Solutions
 
-Hi! Welcome to my Project Euler puzzle repository. I'm new to programming, and I'm on a mission to solve all of the Project Euler puzzles with my first language, Ruby.
+Hi! Welcome to my [Project Euler](https://projecteuler.net/archives) repository. I'm new to programming, and I'm on a mission to solve all of the Project Euler problems with my first language, Ruby.
 
 My priorities are the following, in this order:
 
