@@ -3,54 +3,39 @@
 
 # How many such routes are there through a 20×20 grid?
 
-#   x   0    1    2    3   y
-$a = [[".", "p", ".", "."],  # 0
-     [".", ".", ".", "."],   # 7
-     [".", ".", ".", "."],   # 11
-     [".", ".", ".", "."]]   # 15
-
 def possible_paths(side_length)
-  indices = [0]
-
-  until indices.uniq == [side_length ** 2 - 1]
-    new_indices = []
-    indices.each_with_index do |position, index|
-      if position == side_length ** 2 - 1
-        new_indices << position
-      elsif (position + 1) % side_length != 0 && position < side_length ** 2 - side_length
-        # neither on the right edge nor on the bottom edge
-        new_indices << position + side_length
-        new_indices << position + 1
-      elsif (position + 1) % side_length == 0
-        # on the right edge
-        new_indices << position + side_length
+  values = (0..(side_length + 1) ** 2 - 1).to_a.map{0}
+  until values.count(0) == 1
+    new_values = []
+    values.each_with_index do |value, index|
+      if index == 0
+        new_values[index] = 0
+      elsif index % (side_length + 1) == 0
+        new_values[index] = 1
+      elsif index <= (side_length)
+        new_values[index] = 1
       else
-        # on the bottom edge
-        new_indices << position + 1
+        new_values[index] = values[index - 1] + values[index - (side_length + 1)]
       end
+      values = new_values
     end
-    indices = new_indices
   end
-  indices.length
+  values.last
 end
 
-p possible_paths(13)
+solution = possible_paths(20)
 
-# def possible_paths(side_length, index)
-#   if (index + 1) % side_length != 0 && index < side_length ** 2 - side_length
-#     # neither on the right edge nor on the bottom edge
-#     possible_paths(side_length, index + 1) + possible_paths(side_length, index + side_length)
-#   elsif index == side_length ** 2 - 1
-#     # finished
-#     return 1
-#   elsif (index + 1) % side_length == 0
-#     # on the right edge
-#     possible_paths(side_length, index + side_length)
-#   else
-#     # on the bottom edge
-#     possible_paths(side_length, index + 1)
-#   end
-# end
+p solution
 
-# p possible_paths(4, 0)
+# => 137846528820
 
+
+# This one took me nearly four full train rides to think through. I came up with a recursive
+# method that solved the problem by manually counting all of the possible paths, then an
+# iterative one, but both took too long to run for grids larger than 14x14. I made a
+# breakthrough when I realized that on the right and bottom edges, only one possible path
+# existed. At the index diagonally up and left of the final index, the number of paths at
+# that point is the sum of the index to the bottom and the index to the right. The same is
+# true of all indices! I flipped my board diagonally such that paths traveled from the bottom
+# right to the top left, and now my method will find the number of paths for any nxn grid, not
+# just a 20x20.
