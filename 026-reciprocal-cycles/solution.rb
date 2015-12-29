@@ -17,7 +17,7 @@
 # Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal
 # fraction part.
 
-def repeating_decimal_cycle(one_over_this)
+def decimal_sequence(one_over_this)
   quotient = ""
   dividends = [1]
 
@@ -30,10 +30,7 @@ def repeating_decimal_cycle(one_over_this)
     dividends << [dividend]
   end
 
-  # from the two competing values in dividends...
-  puts dividends.find_index {|div| div == dividends[-1]}
-
   quotient[1..-1]
 end
 
-p repeating_decimal_cycle(5)
+p decimal_sequence(6)
