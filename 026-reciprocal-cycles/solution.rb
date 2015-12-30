@@ -17,7 +17,7 @@
 # Find the value of d < 1000 for which 1/d contains the longest recurring cycle in its decimal
 # fraction part.
 
-def decimal_sequence(one_over_this)
+def repeating_decimal_sequence(one_over_this)
   quotient = ""
   dividends = [1]
 
@@ -30,7 +30,29 @@ def decimal_sequence(one_over_this)
     dividends << [dividend]
   end
 
-  quotient[1..-1]
+  start_index = dividends.find_index(dividends[-1])
+
+  return "" if quotient[start_index..-1] == "0"
+  quotient[start_index..-1]
 end
 
-p decimal_sequence(6)
+sequences = {}
+
+(1..999).each do |denominator|
+  sequences[denominator] = repeating_decimal_sequence(denominator).length
+end
+
+max_pair = [0, 0]
+
+sequences.each do |key, value|
+  max_pair = [key, value] if value > max_pair[-1]
+end
+
+p max_pair[0]
+p repeating_decimal_sequence(983).length
+
+# => 983
+
+# This solution astonished me. The repeating decimal sequence in 1 / 983 is 982 digits long!
+# Who would have known? This kind of length is probably what accounts for the long runtime on
+# this solution. It also explains why Project Euler only had us run the script from 1 to 1000.
