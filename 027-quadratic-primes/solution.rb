@@ -30,13 +30,7 @@ b_possibilities = Prime.each(999).to_a
 # f(a, b, 0) = 0² + a*0 + b = b.
 # Code that does not take advantage of this information will probably take a long time to run.
 
-combos = []
-
-a_possibilities.each do |a_pos|
-  b_possibilities.each do |b_pos|
-    combos << [a_pos, b_pos]
-  end
-end
+combos = a_possibilities.product(b_possibilities)
 
 number_of_consecutive_primes = {}
 
@@ -48,16 +42,10 @@ combos.each do |combo|
   number_of_consecutive_primes[combo] = counter
 end
 
-best_combo = {"bad combo" => 0}
+best_combo = number_of_consecutive_primes.max_by{ |combo, num_of_primes| num_of_primes}
 
-number_of_consecutive_primes.each do |combo, num_of_primes|
-  if num_of_primes > best_combo.values.first
-    best_combo = {}
-    best_combo[combo] = num_of_primes
-  end
-end
+p best_combo.first.reduce(:*)
 
-p best_combo.keys.first.reduce(:*)
 
 # => -59231
 # The equation we're looking for is n² - 61n + 971 and the number of primes is 71.
