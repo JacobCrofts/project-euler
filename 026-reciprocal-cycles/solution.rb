@@ -49,7 +49,6 @@ sequences.each do |key, value|
 end
 
 p max_pair[0]
-p repeating_decimal_sequence(983).length
 
 # => 983
 
