@@ -35,9 +35,7 @@ words = []
 
 (1..1000).each {|number| words << number_to_word(number)}
 
-solution = words.join("").length
-
-p solution
+p words.join("").length
 
 # => 21124
 

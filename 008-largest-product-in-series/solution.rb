@@ -19,9 +19,7 @@ highest_product = 0
   highest_product = product if product > highest_product
 end
 
-solution = highest_product
-
-p solution
+p highest_product
 
 # => 23514624000
 

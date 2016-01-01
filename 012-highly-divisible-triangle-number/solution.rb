@@ -50,9 +50,7 @@ until number_of_divisors(nth_triangle_number(n)) > 500
   n += 1
 end
 
-solution = nth_triangle_number(n)
-
-p solution
+p nth_triangle_number(n)
 
 # => 76576500
 

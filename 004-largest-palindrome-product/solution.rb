@@ -19,8 +19,6 @@ palindrome_products = []
   end
 end
 
-solution = palindrome_products.max
-
-p solution
+p palindrome_products.max
 
 # => 906609

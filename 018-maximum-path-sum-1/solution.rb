@@ -57,9 +57,7 @@ def highest_sum(maze, row = 0, column = 0, sum = 0)
   sum + [highest_sum(maze, row + 1, column), highest_sum(maze, row + 1, column + 1)].max
 end
 
-solution = highest_sum(maze)
-
-p solution
+p highest_sum(maze)
 
 # => 1074
 

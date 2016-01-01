@@ -23,11 +23,7 @@ until a == 1000
   a += 1
 end
 
-solution = pythagorean_triplets[0].reduce(:*)
-
-p solution
+p pythagorean_triplets[0].reduce(:*)
 
 # => 31875000
-
-
 # the triplet itself is [200, 375, 425]

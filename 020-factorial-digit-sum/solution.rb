@@ -17,8 +17,6 @@ def sum_of_digits(number)
   number.to_s.split("").inject(0) {|sum, char| sum + char.to_i}
 end
 
-solution = sum_of_digits(factorial(100))
-
-p solution
+p sum_of_digits(factorial(100))
 
 # => 648

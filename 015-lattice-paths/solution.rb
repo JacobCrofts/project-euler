@@ -23,9 +23,7 @@ def possible_paths(side_length)
   values.last
 end
 
-solution = possible_paths(20)
-
-p solution
+p possible_paths(20)
 
 # => 137846528820
 

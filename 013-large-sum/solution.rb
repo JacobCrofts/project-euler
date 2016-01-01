@@ -104,8 +104,6 @@ lots_of_numbers = "37107287533902102798797998220837590246510135740250
 array_of_numbers = lots_of_numbers.split("\n").map {|num_string| num_string.to_i}
 
 sum = array_of_numbers.reduce(:+)
-solution = sum.to_s[0..9].to_i
-
-p solution
+p sum.to_s[0..9].to_i
 
 # => 5537376230

@@ -18,9 +18,7 @@ until divisible_by_1_thru_20?(counter)
   counter += 2520
 end
 
-solution = counter
-
-p solution
+p counter
 
 # => 232792560
 

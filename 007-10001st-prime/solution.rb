@@ -21,9 +21,7 @@ def first_n_primes(n)
   primes
 end
 
-solution = first_n_primes(10001).last
-
-p solution
+p first_n_primes(10001).last
 
 # => 104743
 

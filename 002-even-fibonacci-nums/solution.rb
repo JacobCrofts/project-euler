@@ -18,8 +18,7 @@ end
 
 fibonacci_nums = fib_nums_up_to(4_000_000)
 even_fibonacci_nums = fibonacci_nums.select! { |val| val.even? }
-solution = even_fibonacci_nums.reduce(:+)
 
-p solution
+p even_fibonacci_nums.reduce(:+)
 
 # => 4613732

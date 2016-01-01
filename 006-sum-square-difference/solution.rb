@@ -15,9 +15,7 @@
 sum_of_squares = (1..100).inject {|sum, int| sum + int ** 2 }
 square_of_sum = (1..100).reduce(:+) ** 2
 
-solution = square_of_sum - sum_of_squares
-
-p solution
+p square_of_sum - sum_of_squares
 
 # => 25164150
 

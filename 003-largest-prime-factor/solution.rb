@@ -9,8 +9,6 @@ Prime.each(Math.sqrt(600851475143)) do |prime|
   prime_factors << prime if 600851475143 % prime == 0
 end
 
-solution = prime_factors.max
-
-p solution
+p prime_factors.max
 
 # => 6857

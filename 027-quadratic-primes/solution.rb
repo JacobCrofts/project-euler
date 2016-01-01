@@ -46,6 +46,5 @@ best_combo = number_of_consecutive_primes.max_by{ |combo, num_of_primes| num_of_
 
 p best_combo.first.reduce(:*)
 
-
 # => -59231
 # The equation we're looking for is n² - 61n + 971 and the number of primes is 71.

@@ -9,8 +9,6 @@ multiples = []
   multiples << int if int % 3 == 0 || int % 5 == 0
 end
 
-solution = multiples.reduce(:+)
-
-p solution
+p multiples.reduce(:+)
 
 # => 234168
