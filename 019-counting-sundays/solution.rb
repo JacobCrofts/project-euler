@@ -1,3 +1,19 @@
+# You are given the following information, but you may prefer to do some research for yourself.
+
+# 1 Jan 1900 was a Monday.
+# Thirty days has September,
+# April, June and November.
+# All the rest have thirty-one,
+# Saving February alone,
+# Which has twenty-eight, rain or shine.
+# And on leap years, twenty-nine.
+
+# A leap year occurs on any year evenly divisible by 4, but not on a century unless it is
+# divisible by 400.
+
+# How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to
+# 31 Dec 2000)?
+
 def days_in(year)
   if year % 400 == 0
     366
@@ -14,8 +30,6 @@ leap_year_months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 normal_months = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
 
 days_in_1900s = (1901..2000).inject(0) {|sum, year| sum + days_in(year)}
-
-# 1901 started on a Tuesday. We want SUNDAYS!
 
 sundays = []
 firsts_of_months = []
@@ -42,3 +56,12 @@ end
 end
 
 p sundays_on_firsts_of_months
+
+# => 171
+
+# This was a tedious problem. No doubt there's an easier way to do it using the Time/DateTime
+# modules, but I decided to do it manually as an extra challenge. If you're working on the same
+# problem and getting something very close to the correct answer, be sure you're calculating
+# whether a year is a leap year correctly, and check any ranges you have (e.g. (1..some_variable))
+# to make sure you aren't offsetting your data. The difference between .. and ... or 0.. and 1..
+# may make the difference between a correct and incorrect answer.
