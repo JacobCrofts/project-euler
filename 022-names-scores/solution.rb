@@ -25,6 +25,8 @@ File.readlines(file).each do |line|
   names = line.split("\"").delete_if{|x| x == ","}
 end
 
-p names.inject(0) {|sum, name| sum + name_value(name) * (names.index(name) + 1)}
+names.sort!
 
-# => 850405930
+p names.inject(0) {|sum, name| sum + name_value(name) * names.index(name)}
+
+# => 871198282
