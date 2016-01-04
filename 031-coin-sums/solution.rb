@@ -9,42 +9,29 @@
 
 # How many different ways can £2 be made using any number of coins?
 
-def value(coins)
-  values = [1, 2, 5, 10, 20, 50, 100, 200]
-  (0..7).inject(0) {|sum, index| sum + coins[index] * values[index]}
+def value(coins, options)
+  (0..options.length - 1).inject(0) {|sum, index| sum + coins[index] * options[index]}
 end
 
-def ways_to_make_change(pence)
-  options = [[pence, 0, 0, 0, 0, 0, 0, 0]]
-  next_option = options.last
+def value_with_ones(options)
+  options.reduce(:+)
 end
 
-# p ways_to_make(5, [1, 2])
+def option_combos(value, array_of_options)
+  option_combos = []
+  filtered_options = array_of_options.sort.delete_if {|option| option > value}
+  (1..filtered_options.length).each do |x|
+    option_combos << filtered_options.combination(x).to_a
+  end
+  option_combos.flatten(1).delete_if {|combo| combo.reduce(:+) > value}
+end
 
-# [1, 2]
+def ways_to_make(value, options)
+  combos = option_combos(value, options)
+  combos.length + ways_to_make(value)
+end
 
-# [5, 0]
-# [3, 1]
-# [1, 2]
+# p value([1, 1, 1, 1, 1, 1, 1, 1], [1, 2, 5, 10, 20, 50, 100, 200])
 
+p option_combos(200, [1, 2, 5, 10, 20, 50, 100, 200])
 
-
-# def ways_to_make(value)
-#   puts "finding ways to make #{value}"
-#   return value if (0..2).include?(value)
-#   usable_coins = [1, 2, 5, 10, 20, 50, 100, 200].delete_if {|coin| coin > value}
-
-#   if value.odd?
-#     ways_to_make(value - 1)
-#   elsif value % 200 == 0
-#     1 + 2 * ways_to_make(100)
-#   elsif value % 100 == 0
-#     1 + 2 * ways_to_make(50)
-#   elsif value
-#   end
-
-# end
-
-# p ways_to_make(5)
-
-# 5: 3
