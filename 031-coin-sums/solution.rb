@@ -15,15 +15,6 @@ def value(coins, options)
   (0..options.length - 1).inject(0) {|sum, index| sum + coins[index] * options[index]}
 end
 
-# def includes_pair?(array_of_hashes, pair)
-#   array_of_hashes.each {|hash| return true if hash == pair}
-#   false
-# end
-
-# # hash = [{1 => 1}, {2 => 3}]
-
-# # p includes_pair?(hash, {1 => 3})
-
 def possible_to_sum?(value, combo)
 
   return false if combo.reduce(:+) > value
@@ -40,7 +31,7 @@ def possible_to_sum?(value, combo)
   false
 end
 
-def option_combos(value, array_of_options, used_combos = [])
+def option_combos(value, array_of_options)
   option_combos = []
   filtered_options = array_of_options.sort.delete_if {|option| option > value}
   (1..filtered_options.length).each do |x|
@@ -56,3 +47,8 @@ def ways_to_make(value, options)
 end
 
 p ways_to_make(200, [1, 2, 5, 10, 20, 50, 100, 200])
+
+# => 73682
+
+# A quick scan of the interwebs has shown me that there are much more efficient ways of doing this.
+# I will have to refactor this later.
