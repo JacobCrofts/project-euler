@@ -13,8 +13,20 @@ def value(coins, options)
   (0..options.length - 1).inject(0) {|sum, index| sum + coins[index] * options[index]}
 end
 
-def value_with_ones(options)
-  options.reduce(:+)
+def possible_to_sum?(value, combo)
+
+  return false if combo.reduce(:+) > value
+
+  combo.each do |coin_value|
+    return true if (value - combo.reduce(:+)) % coin_value == 0
+  end
+
+  (1..value / combo.min).each do |times_to_combo|
+    combo.repeated_combination(times_to_combo).to_a.each do |coin_combination|
+      return true if (coin_combination.reduce(:+) + combo.reduce(:+) == value)
+    end
+  end
+  false
 end
 
 def option_combos(value, array_of_options)
@@ -23,15 +35,16 @@ def option_combos(value, array_of_options)
   (1..filtered_options.length).each do |x|
     option_combos << filtered_options.combination(x).to_a
   end
-  option_combos.flatten(1).delete_if {|combo| combo.reduce(:+) > value}
+  option_combos.flatten(1).delete_if {|combo| !possible_to_sum?(value, combo)}
 end
 
 def ways_to_make(value, options)
   combos = option_combos(value, options)
-  combos.length + ways_to_make(value)
+  p combos
+  return 1 if combos == []
+  combos.reduce(0) {|sum, combo| sum + ways_to_make(value - combo.reduce(:+), combo)}
 end
 
-# p value([1, 1, 1, 1, 1, 1, 1, 1], [1, 2, 5, 10, 20, 50, 100, 200])
 
-p option_combos(200, [1, 2, 5, 10, 20, 50, 100, 200])
 
+p ways_to_make(100, [1, 2, 5, 10, 25, 50])
