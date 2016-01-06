@@ -9,6 +9,8 @@
 
 # HINT: Some products can be obtained in more than one way so be sure to only include it once in your sum.
 
+start_time = Time.now
+
 def pan_1_thru_9?(string)
   string.length == 9 && string.split("").sort == (1..string.length).to_a.sort.map {|x| x.to_s}
 end
@@ -22,16 +24,29 @@ def contains_repeating_chars?(number)
   a.uniq != a
 end
 
+def minimum_multiplier(int)
+  10 ** (4 - int.to_s.length)
+end
+
+def maximum_multiplier(int)
+  10000 / int
+end
+
 pandigital_products = []
 
 options = (1..9999).to_a.delete_if {|option| contains_repeating_chars?(option)}
 
 options.each do |num1|
-  options.each do |num2|
+  (minimum_multiplier(num1)..maximum_multiplier(num1)).each do |num2|
     pandigital_products << [num1, num2].sort if pandigital_product?(num1, num2)
   end
 end
 
 p pandigital_products.uniq.inject(0) {|sum, products| sum + products.reduce(:*)}
+puts "Found solution in #{(Time.now - start_time) * 1000} ms"
 
 # => 56370
+
+# Defining an acceptable multiplier range for each number in (1..9999) optimized this problem very
+# nicely, bringing the runtime down from over 20 seconds to under 700ms. Ignoring items within that
+# range that contain repeating characters also helps marginally.
