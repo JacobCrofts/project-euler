@@ -47,7 +47,7 @@ pandigital_products.map! {|pair| pair.reduce(:*)}
 p pandigital_products.uniq.reduce(:+)
 puts "Found solution in #{(Time.now - start_time) * 1000} ms"
 
-# => should be 45228
+# => 45228
 
 # Defining an acceptable multiplier range for each number in (1..9999) optimized this problem very
 # nicely, bringing the runtime down from over 20 seconds to under 700ms. Ignoring items within that
