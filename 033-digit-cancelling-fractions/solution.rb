@@ -9,9 +9,7 @@
 # If the product of these four fractions is given in its lowest common terms, find the value of the
 # denominator.
 
-# def less_than_one?(numerator, denominator)
-#   numerator < denominator
-# end
+start_time = Time.now
 
 def commonalities(numerator, denominator)
   coms = []
@@ -39,22 +37,24 @@ def curious_fraction?(numerator, denominator)
 end
 
 def common_factor(num1, num2)
-  (2..num1 / 2).to_a.each do |possible_factor|
+  (2..[num1 / 2, 2].max).to_a.each do |possible_factor|
     return possible_factor if num1 % possible_factor == 0 && num2 % possible_factor == 0
   end
+  nil
 end
 
 def lowest_common_terms(numerator, denominator)
-  # until common_factor(numerator, denominator) == nil
-  #   numerator = numerator / common_factor(numerator, denominator)
-  #   puts numerator
-  #   denominator = denominator / common_factor(numerator, denominator)
-  # end
-  # [numerator, denominator]
+  factor = common_factor(numerator, denominator)
+
+  return [numerator, denominator] if factor == nil
+  lowest_common_terms(numerator / factor, denominator / factor)
+end
+
+def to_frac(array)
+  "#{array[0]}/#{array[1]}"
 end
 
 checkable_fractions = []
-curious_fractions = []
 
 (10..99).to_a.each do |numerator|
   (numerator + 1..99).to_a.each do |denominator|
@@ -62,6 +62,16 @@ curious_fractions = []
   end
 end
 
-p lowest_common_terms(4, 8)
+curious_fractions = checkable_fractions.delete_if {|frac| !curious_fraction?(frac[0], frac[1])}
 
-# p checkable_fractions.select {|frac| curious_fraction?(frac[0], frac[1])}
+fraction_product = [1, 1]
+
+curious_fractions.each do |frac|
+  fraction_product[0] *= frac[0]
+  fraction_product[1] *= frac[1]
+end
+
+puts to_frac(lowest_common_terms(fraction_product[0], fraction_product[1]))
+puts "calculated in #{(Time.now - start_time) * 1000} ms"
+
+# => 19/1900
