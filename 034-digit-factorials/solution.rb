@@ -10,11 +10,8 @@ def factorial(number)
 end
 
 def curious_number?(number)
-  # number.to_s.split("").reduce(0) {|sum, digit| sum + factorial(digit.to_i)}
   number == number.to_s.split("").reduce(0) {|sum, digit| sum + factorial(digit.to_i)}
 end
-
-# p curious_number?(9999999)
 
 digit_factorials = (0..9).map {|x| factorial(x)}
 
