@@ -37,7 +37,7 @@ def curious_fraction?(numerator, denominator)
 end
 
 def common_factor(num1, num2)
-  (2..[num1 / 2, 2].max).to_a.each do |possible_factor|
+  (2..[num1, 2].max).to_a.each do |possible_factor|
     return possible_factor if num1 % possible_factor == 0 && num2 % possible_factor == 0
   end
   nil
@@ -64,14 +64,11 @@ end
 
 curious_fractions = checkable_fractions.delete_if {|frac| !curious_fraction?(frac[0], frac[1])}
 
-fraction_product = [1, 1]
+final_fraction = curious_fractions.transpose.map {|values| values.reduce(:*)}
 
-curious_fractions.each do |frac|
-  fraction_product[0] *= frac[0]
-  fraction_product[1] *= frac[1]
-end
+final_reduced_fraction = lowest_common_terms(final_fraction[0], final_fraction[1])
 
-puts to_frac(lowest_common_terms(fraction_product[0], fraction_product[1]))
+p final_reduced_fraction[1]
 puts "calculated in #{(Time.now - start_time) * 1000} ms"
 
-# => 19/1900
+# => 100
