@@ -68,3 +68,7 @@ p final_reduced_fraction[1]
 puts "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 100
+
+# Line 63 uses the Array#transpose method, which is definitely worth learning. Since my fractions are
+# formatted as arrays with a numerator and denominator, this method (which places all the numerators
+#   and all the denominators in respective arrays) makes multiplying fractions much easier.
