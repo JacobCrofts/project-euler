@@ -50,10 +50,6 @@ def lowest_common_terms(numerator, denominator)
   lowest_common_terms(numerator / factor, denominator / factor)
 end
 
-def to_frac(array)
-  "#{array[0]}/#{array[1]}"
-end
-
 checkable_fractions = []
 
 (10..99).to_a.each do |numerator|
