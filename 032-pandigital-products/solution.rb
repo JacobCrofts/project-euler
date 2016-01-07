@@ -42,11 +42,19 @@ options.each do |num1|
   end
 end
 
-p pandigital_products.uniq.inject(0) {|sum, products| sum + products.reduce(:*)}
+pandigital_products.map! {|pair| pair.reduce(:*)}
+
+p pandigital_products.uniq.reduce(:+)
 puts "Found solution in #{(Time.now - start_time) * 1000} ms"
 
-# => 56370
+# => should be 45228
 
 # Defining an acceptable multiplier range for each number in (1..9999) optimized this problem very
 # nicely, bringing the runtime down from over 20 seconds to under 700ms. Ignoring items within that
-# range that contain repeating characters also helps marginally.
+# range that contain repeating characters also helps marginally
+
+# The clarification at the end of this problem is important, and I misunderstood it at first. If
+# you're getting 56370 as your solution, you probably have the same problem. Take, for example, the
+# combinations [18, 297] and [27, 198]. The products of these are the same: 5346, and both sets are
+# pandigital. However, we require unique products in our solution, so we may only count this product
+# once.
