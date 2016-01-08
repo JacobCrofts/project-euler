@@ -44,5 +44,5 @@ p truncatable_primes.reduce(:+)
 # numbers exist, does this mean we are free to brute force our way through this until we have found
 # the eleven targets? Regardless of the answer, how did mathematicians discover that only eleven such
 # numbers exist? Currently, I iterate through all prime numbers up through 1,000,000, but only because
-# I know that the eleven targets are all below that number. My solution could be improved if I could
-# find a way to iterate through an uncertain number of primes until I find all eleven values.
+# I know that the eleven targets are all below that number. My solution could be improved if I
+# found a way to iterate through an uncertain number of primes until I found all eleven values.
