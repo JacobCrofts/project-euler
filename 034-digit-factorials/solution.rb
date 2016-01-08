@@ -4,6 +4,8 @@
 
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
+start_time = Time.now
+
 def factorial(number)
   return 1 if number == 0
   (1..number).to_a.reduce(:*)
@@ -33,8 +35,8 @@ possible_sums.flatten.each do |num|
   curious_numbers << num if curious_number?(num)
 end
 
-p curious_numbers
 p curious_numbers.uniq.delete_if {|x| x <= 2}.reduce(:+)
+puts "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 40730
 
