@@ -5,6 +5,8 @@
 
 # How many circular primes are there below one million?
 
+start_time = Time.now
+
 require 'prime'
 
 def contains_even_digits?(number)
@@ -46,6 +48,7 @@ numbers_to_check.each do |number|
 end
 
 p circular_primes.length
+puts "calculation took #{(Time.now - start_time) * 1000} ms"
 
 # => 55
 
