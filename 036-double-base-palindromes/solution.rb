@@ -4,42 +4,32 @@
 
 # (Please note that the palindromic number, in either base, may not include leading zeros.)
 
+start_time = Time.now
+
 def palindromic?(number)
   number.to_s.reverse == number.to_s
 end
 
-# def to_base_10(binary_number)
-#   digits = binary_number.to_s.split("").reverse
-#   digits.map.with_index {|digit, index| 2 ** index * digit.to_i}.reduce(:+)
-# end
-
-def to_binary(number)
-
-  binary = ""
-
-  power = 0
-  until 2 ** power > number
-    power += 1
-  end
-
-  power -= 1
-
-  until number == 0
-    if number > 2 ** power
-      number -= 2 ** power
-      binary << "1"
-    elsif number == 2 ** power
-      binary << "1"
-      (power - 1).times {binary << "0"}
-      number = 0
-    else
-      binary << "0"
-      number -= 2 ** power
-    end
-    power -= 1
-  end
-
-  binary
+def start_power(number)
+  start_power = 0
+  start_power += 1 until 2**start_power > number
+  start_power - 1
 end
 
-p to_binary(33)
+def to_binary(number)
+  return "" if number == 0
+  new_number = number - 2**start_power(number)
+  binary_number = "1" + "0" * (start_power(number) - start_power(new_number) - 1)
+  binary_number + to_binary(new_number)
+end
+
+p (1..1_000_000).to_a.select {|number| palindromic?(number) && palindromic?(to_binary(number))}.reduce(:+)
+p "calculated in #{(Time.now - start_time) * 1000} ms"
+
+# => 872187
+
+# This exercise had me scratching my head over what determines the efficiency of ruby
+# methods. I'm running a recursive method (plus several others) on all numbers from one
+# through a million, yet the runtime is under a second. This problem comes at an interesting
+# time: right after several problems in which the main point of the exercise was to show us
+# the importance of sanitizing our method input when iterating through long ranges.
