@@ -21,20 +21,22 @@ def concatenated_product(number, max)
   (1..max).to_a.reduce("") {|string, index| string + (number * index).to_s}
 end
 
-def min_checkable_number(max)
-  # this could boost performance, if needed
+def product_is_pandigital?(number, max)
+  pandigital_9?(concatenated_product(number, max))
 end
-
-# n, in the example provided, cannot exceed 9. Otherwise, we'll have minimum string lengths that exceed 9.
 
 max_pandigital = 0
 
-(1..9).each do |n|
+(2..9).each do |n|
   number_to_check = 1
   until concatenated_product(number_to_check, n).length > 9
-    max_pandigital = concatenated_product(number_to_check, n).to_i if concatenated_product(number_to_check, n).to_i > max_pandigital
+    max_pandigital = concatenated_product(number_to_check, n).to_i if concatenated_product(number_to_check, n).to_i > max_pandigital && pandigital_9?(concatenated_product(number_to_check, n))
     number_to_check += 1
   end
 end
 
 p max_pandigital
+
+# => 932718654
+
+# n, as it is referenced in the problem, cannot exceed 9. Otherwise, we would have minimum string lengths that exceed 9.
