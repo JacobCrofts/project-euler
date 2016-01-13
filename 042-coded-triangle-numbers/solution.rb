@@ -10,3 +10,34 @@
 # Using words.txt (right click and 'Save Link/Target As...'), a 16K text file containing nearly
 # two-thousand common English words, how many are triangle words?
 
+file = "p042_words.txt"
+
+names = nil
+
+File.readlines(file).each do |line|
+  names = line.split("\"").delete_if {|word| word == "," || word == ""}
+  # sanitizing our input: we collected one empty string at the beginning
+end
+
+def letter_value(letter)
+  letters = ("A".."Z").to_a
+  letters.index(letter) + 1
+end
+
+def word_value(word)
+  word.split("").inject(0) {|sum, letter| sum + letter_value(letter)}
+end
+
+def triangle_value?(value)
+  # Quadratic formula here. We can reject the other solution, -1 - Math.sqrt(...) / 2 because that would always be a negative number.
+  triangle_index = (-1 + Math.sqrt(1 + 8 * value)) / 2
+  triangle_index == triangle_index.to_i
+end
+
+def triangle_word?(word)
+  triangle_value?(word_value(word))
+end
+
+p names.select {|name| triangle_word?(name)}.length
+
+# => 162
