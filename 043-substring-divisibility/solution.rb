@@ -33,13 +33,18 @@ end
 
 pandigitals09 = (0..9).to_a.permutation(10).to_a.map {|digits| digits.join("").to_i}
 
-pandigitals_with_curious_property = pandigitals09.select {|pan| has_substring_property?(pan.to_i)}
+p pandigitals09.length
 
-p pandigitals_with_curious_property.reduce(:+)
+pandigitals09.select! {|pan| pan.to_s[3].to_i % 2 == 0 && pan.to_s[5].to_i % 5 == 0}
+
+p pandigitals09.length
+
+pandigitals09.select! {|pan| has_substring_property?(pan.to_i)}
+
+p pandigitals09.reduce(:+)
 
 puts "Time elapsed: #{(Time.now - start_time)} sec"
 
 # => 16695334890
 
-# Takes 83 seconds to run on my machine, which is beyond the acceptable limit in my opinion.
-# Let's refactor this one later.
+# After some refactoring, I managed to get the time down from 83 seconds to 23 seconds. However, this solution is even worse in terms of having chained methods everywhere and redundant code... I will refactor this again later so that I calculate possible substrings first, then chain the compatable ones together.
