@@ -17,31 +17,52 @@ start_time = Time.now
 
 require 'prime'
 
-def has_substring_property?(pandigital)
-  return false if pandigital.to_s.length != 10
-  substrings = []
-  primes = Prime.first(7)
-
-  (1..7).each do |index|
-    substrings << pandigital.to_s[index..index + 2]
-  end
-
-  substrings.each_with_index {|substr, i| return false if substr.to_i % primes[i] != 0}
-
-  true
+def pandigital?(number)
+  number.to_s.split("").uniq == number.to_s.split("")
 end
 
-pandigitals09 = (0..9).to_a.permutation(10).to_a.map {|digits| digits.join("").to_i}
+viable_hundreds = (100...999).select {|num| pandigital?(num)}
 
-p pandigitals09.length
+divisible_substrings_2 = viable_hundreds.select {|x| x % 2 == 0}
+divisible_substrings_3 = viable_hundreds.select {|x| x % 3 == 0}
+divisible_substrings_5 = viable_hundreds.select {|x| x % 5 == 0}
+divisible_substrings_7 = viable_hundreds.select {|x| x % 7 == 0}
+divisible_substrings_11 = viable_hundreds.select {|x| x % 11 == 0}
+divisible_substrings_13 = viable_hundreds.select {|x| x % 13 == 0}
+divisible_substrings_17 = viable_hundreds.select {|x| x % 17 == 0}
 
-pandigitals09.select! {|pan| pan.to_s[3].to_i % 2 == 0 && pan.to_s[5].to_i % 5 == 0}
 
-p pandigitals09.length
+p viable_hundreds
+# (100...999).to_a.select {|number| number.even?}
 
-pandigitals09.select! {|pan| has_substring_property?(pan.to_i)}
 
-p pandigitals09.reduce(:+)
+
+
+# def has_substring_property?(pandigital)
+#   return false if pandigital.to_s.length != 10
+#   substrings = []
+#   primes = Prime.first(7)
+
+#   (1..7).each do |index|
+#     substrings << pandigital.to_s[index..index + 2]
+#   end
+
+#   substrings.each_with_index {|substr, i| return false if substr.to_i % primes[i] != 0}
+
+#   true
+# end
+
+# pandigitals09 = (0..9).to_a.permutation(10).to_a.map {|digits| digits.join("").to_i}
+
+# p pandigitals09.length
+
+# pandigitals09.select! {|pan| pan.to_s[3].to_i % 2 == 0 && pan.to_s[5].to_i % 5 == 0}
+
+# p pandigitals09.length
+
+# pandigitals09.select! {|pan| has_substring_property?(pan.to_i)}
+
+# p pandigitals09.reduce(:+)
 
 puts "Time elapsed: #{(Time.now - start_time)} sec"
 
