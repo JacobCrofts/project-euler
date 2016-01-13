@@ -5,19 +5,23 @@
 
 require 'prime'
 
-def pandigital?(number)
-  digits = number.to_s.split("").map {|digit| digit.to_i}
-  print digits.sort
-  print (1..number.to_s.length).to_a
-  digits.sort == (1..number.to_s.length).to_a
+pandigitals = []
+
+(2..9).each do |number|
+  pandigitals << (1..number).to_a.permutation(number).to_a
 end
 
-# We need to sift through pandigitals, not primes, for performance's sake. The method we have now will not be used. :(
+pandigitals = pandigitals.flatten(1).map {|combo| combo.join("").to_i}.reverse
 
-# (1..100).each do |num|
-#   puts num if pandigital?(num)
-# end
+index = 0
 
-# Prime.each(10000000) do |prime|
-#   puts prime if pandigital?(prime)
-# end
+until pandigitals[index].prime?
+  index += 1
+end
+
+p pandigitals[index]
+
+# => 7652413
+
+# I found myself sifting through pandigitals in search of a prime number rather than sifting through
+# primes in search of a pandigital. The latter's runtime makes this approach necessary.
