@@ -50,4 +50,8 @@ puts "Time elapsed: #{(Time.now - start_time) * 1000} ms"
 
 # => 16695334890
 
-# I refactored this problem a bunch because my initial solution took a very long time to run - 83 seconds. Rather than constructing pandigital numbers first, then filtering them according to whether they have this special substring property, or constructing primes first and then filtering, I now filter my substrings each step of the way, adding only one digit at a time. This may seem tedious at first, but it winds up needing much less code and runs in under 20 ms.
+# I refactored this problem a bunch because my initial solution took a very long time to run - 83
+# seconds. Rather than constructing pandigital numbers first, then filtering them according to whether
+# they have this special substring property, or constructing primes first and then filtering, I now
+# filter my substrings each step of the way, adding only one digit at a time. This may seem tedious
+# at first, but it winds up needing much less code and runs in under 20 ms.
