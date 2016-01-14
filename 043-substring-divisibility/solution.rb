@@ -21,51 +21,33 @@ def pandigital?(number)
   number.to_s.split("").uniq == number.to_s.split("")
 end
 
+def filter(array_product, value)
+  array_product.delete_if {|subarr| !(subarr.join("")[0..2].to_i % value == 0)}
+  array_product.delete_if {|subarr| !pandigital?(subarr.join("").to_i)}
+  array_product.map {|subarr| subarr.join("")}
+end
+
+def add_first_digit(substring_compound)
+  first_digit = ("0".."9").to_a - substring_compound.to_s.split("")
+  (first_digit.first + substring_compound).to_i
+end
+
 viable_hundreds = (100...999).select {|num| pandigital?(num)}
+next_digits = (0..9).to_a
 
-divisible_substrings_2 = viable_hundreds.select {|x| x % 2 == 0}
-divisible_substrings_3 = viable_hundreds.select {|x| x % 3 == 0}
-divisible_substrings_5 = viable_hundreds.select {|x| x % 5 == 0}
-divisible_substrings_7 = viable_hundreds.select {|x| x % 7 == 0}
-divisible_substrings_11 = viable_hundreds.select {|x| x % 11 == 0}
-divisible_substrings_13 = viable_hundreds.select {|x| x % 13 == 0}
-divisible_substrings_17 = viable_hundreds.select {|x| x % 17 == 0}
+substrings = viable_hundreds.select {|substr| substr % 17 == 0}
 
+primes = Prime.first(6).to_a.reverse
 
-p viable_hundreds
-# (100...999).to_a.select {|number| number.even?}
+primes.each do |prime|
+  substrings = filter(next_digits.product(substrings), prime)
+end
 
+substrings.map! {|substr| add_first_digit(substr)}
+p substrings.delete_if {|substr| !pandigital?(substr)}.reduce(:+)
 
-
-
-# def has_substring_property?(pandigital)
-#   return false if pandigital.to_s.length != 10
-#   substrings = []
-#   primes = Prime.first(7)
-
-#   (1..7).each do |index|
-#     substrings << pandigital.to_s[index..index + 2]
-#   end
-
-#   substrings.each_with_index {|substr, i| return false if substr.to_i % primes[i] != 0}
-
-#   true
-# end
-
-# pandigitals09 = (0..9).to_a.permutation(10).to_a.map {|digits| digits.join("").to_i}
-
-# p pandigitals09.length
-
-# pandigitals09.select! {|pan| pan.to_s[3].to_i % 2 == 0 && pan.to_s[5].to_i % 5 == 0}
-
-# p pandigitals09.length
-
-# pandigitals09.select! {|pan| has_substring_property?(pan.to_i)}
-
-# p pandigitals09.reduce(:+)
-
-puts "Time elapsed: #{(Time.now - start_time)} sec"
+puts "Time elapsed: #{(Time.now - start_time) * 1000} ms"
 
 # => 16695334890
 
-# After some refactoring, I managed to get the time down from 83 seconds to 23 seconds. However, this solution is even worse in terms of having chained methods everywhere and redundant code... I will refactor this again later so that I calculate possible substrings first, then chain the compatable ones together.
+# I refactored this problem a bunch because my initial solution took a very long time to run - 83 seconds. Rather than constructing pandigital numbers first, then filtering them according to whether they have this special substring property, or constructing primes first and then filtering, I now filter my substrings each step of the way, adding only one digit at a time. This may seem tedious at first, but it winds up needing much less code and runs in under 20 ms.
