@@ -25,8 +25,8 @@ class Integer
     (1..Math.sqrt(self)).to_a.map {|x| 2 * x**2}
   end
 
-  def smaller_primes
-    Prime.take_while {|prime| prime < self}
+  def smaller_primes(lower_bound = 0)
+    Prime.take_while {|prime| prime < self}.select {|prime| prime >= lower_bound}
   end
 
   def goldbach_product?
@@ -34,3 +34,5 @@ class Integer
   end
 
 end
+
+p 81.smaller_primes(60)
