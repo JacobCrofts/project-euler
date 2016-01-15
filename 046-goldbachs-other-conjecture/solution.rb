@@ -18,6 +18,7 @@ require 'prime'
 class Integer
 
   def odd_comp?
+    return false if self == 1
     !self.prime? && self.odd?
   end
 
@@ -29,10 +30,23 @@ class Integer
     Prime.take_while {|prime| prime < self}.select {|prime| prime >= lower_bound}
   end
 
-  def goldbach_product?
-
+  def goldbach_sum?
+    self.smaller_twice_squares.product(self.smaller_primes).each do |combo|
+      return true if combo.reduce(:+) == self
+    end
+    false
   end
 
 end
 
-p 81.smaller_primes(60)
+integer = 1
+
+until (!integer.goldbach_sum? && integer.odd_comp?)
+  integer += 2
+end
+
+p integer
+
+# => 5777
+
+# A bit slow for my taste (around 10 seconds), but for now it will do.
