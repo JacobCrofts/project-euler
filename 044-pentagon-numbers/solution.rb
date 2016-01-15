@@ -7,17 +7,56 @@
 # Find the pair of pentagonal numbers, Pj and Pk, for which their sum and difference are pentagonal and
 # D = |Pk − Pj| is minimised; what is the value of D?
 
-def nth_pentagonal(n)
-  n * (3 * n - 1) / 2
+class Integer
+
+  def pentagonal?
+    pentagonal_index = (1 + Math.sqrt(1 + 24 * self)) / 6.0
+    pentagonal_index.to_i == pentagonal_index
+  end
+
+  def to_pent
+    self * (3 * self - 1) / 2
+  end
+
+  def difference(number)
+    self > number ? self - number : number - self
+  end
+
+  # assumes both numbers are pentagonal to begin with, for performance's sake
+  def pentagonal_pair?(number)
+    self.difference(number).pentagonal? && (self + number).pentagonal?
+  end
+
 end
 
-def pentagonal?(number)
-  # Quadratic formula here. We can reject the other solution, (1 - Math.sqrt...), because it will always
-  # be less than 1 and therefore an invalid index.
-  pentagonal_index = (1 + Math.sqrt(1 + 24 * number)) / 6.0
-  pentagonal_index.to_i == pentagonal_index
+pairs = []
+pent_index_1 = 1
+
+until pairs.length > 0
+  (1...pent_index_1).each do |pent_index_2|
+    first_pent = pent_index_1.to_pent
+    second_pent = pent_index_2.to_pent
+    pairs << [first_pent, second_pent] if first_pent.pentagonal_pair?(second_pent)
+  end
+  pent_index_1 += 1
 end
 
-pentagonals = (1..100).to_a.map {|index| nth_pentagonal(index)}
+pair = pairs[0]
 
-p pentagonals
+p pair[0] - pair[1]
+
+# => 5482660
+
+# This solution leaves me very dissatisfied, because while I have found the solution (according to
+#   numerous sources on the web), I have not proven that my solution is correct. All my code does is
+# find the first viable solution. To prove that my answer is correct, using the method I have provided,
+# requires me to continue looping until the difference between any two pentagonal numbers is greater
+# than my answer, which won't happen until we hit the 1827554th pentagonal!
+
+# i = 1
+
+# until (i+1).to_pent - i.to_pent > 5482660
+#   i += 1
+# end
+
+# p i # => 1827554
