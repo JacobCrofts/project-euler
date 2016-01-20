@@ -12,26 +12,26 @@
 require 'prime'
 
 def longest_sum_below(max)
-  sums_and_terms = {2 => 1}
-  primes = Prime.take_while {|prime| prime <= max / 21}
+  sum_and_terms = {2 => 1}
+  primes = Prime.take_while {|prime| prime <= max}
 
   primes.each do |prime|
+    break if prime * sum_and_terms.max_by {|key, value| value}.last > max
     sum = 0
     terms = 0
     primes.select {|p| p >= prime}.each do |p|
       sum += p
       terms += 1
       break if sum >= max
-      sums_and_terms[sum] = terms unless !sum.prime? || sums_and_terms[sum]
+      sum_and_terms[sum] = terms unless !sum.prime? || sum_and_terms[sum]
     end
   end
-  sums_and_terms.max_by {|key, value| value}.first
+  sum_and_terms.max_by {|key, value| value}.first
 end
 
-p longest_sum_below(1_000_000)
+p longest_sum_below(1000000)
 
 # => 997651
 
-I have found the solution here, but only after making a very reasonable but still somewhat arbitrary
-constraint on my primes array (line 16). Once I can dynamically establish an upper bound, this method
-will work for numbers other than 1000000.
+# The "break if" lines make my code run much more quickly by ending unnecessary operations before they
+# begin. This is the first time I have successfully and purposefully implemented break within a loop.
