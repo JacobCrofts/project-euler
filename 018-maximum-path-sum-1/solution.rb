@@ -30,6 +30,7 @@
 # containing one-hundred rows; it cannot be solved by brute force, and requires a
 # clever method! ;o)
 
+start_time = Time.now
 
 triangle =
 "              75
@@ -58,6 +59,7 @@ def highest_sum(maze, row = 0, column = 0, sum = 0)
 end
 
 p highest_sum(maze)
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 1074
 

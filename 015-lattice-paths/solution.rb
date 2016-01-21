@@ -3,6 +3,8 @@
 
 # How many such routes are there through a 20×20 grid?
 
+start_time = Time.now
+
 def possible_paths(side_length)
   values = (0..(side_length + 1) ** 2 - 1).to_a.map{0}
   until values.count(0) == 1
@@ -24,6 +26,7 @@ def possible_paths(side_length)
 end
 
 p possible_paths(20)
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 137846528820
 

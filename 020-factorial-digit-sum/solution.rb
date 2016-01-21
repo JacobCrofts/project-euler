@@ -5,9 +5,7 @@
 
 # Find the sum of the digits in the number 100!
 
-# p (1..100).reduce(:*).to_s.split("").inject(0) {|sum, char| sum + char.to_i}
-
-# p (1..100).reduce(:*)
+start_time = Time.now
 
 def factorial(number)
   (1..number).reduce(:*)
@@ -18,5 +16,6 @@ def sum_of_digits(number)
 end
 
 p sum_of_digits(factorial(100))
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 648

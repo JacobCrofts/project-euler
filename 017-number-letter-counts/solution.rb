@@ -9,6 +9,7 @@
 # contains 20 letters. The use of "and" when writing out numbers is in
 # compliance with British usage.
 
+start_time = Time.now
 
 def number_to_word(number)
   ones = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
@@ -36,6 +37,7 @@ words = []
 (1..1000).each {|number| words << number_to_word(number)}
 
 p words.join("").length
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 21124
 

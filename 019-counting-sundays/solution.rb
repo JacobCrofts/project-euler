@@ -14,6 +14,8 @@
 # How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to
 # 31 Dec 2000)?
 
+start_time = Time.now
+
 def days_in(year)
   if year % 400 == 0
     366
@@ -56,6 +58,7 @@ end
 end
 
 p sundays_on_firsts_of_months
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 171
 
