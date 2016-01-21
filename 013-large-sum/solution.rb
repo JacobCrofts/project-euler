@@ -1,5 +1,7 @@
 # Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
 
+start_time = Time.now
+
 lots_of_numbers = "37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
 74324986199524741059474233309513058123726617309629
@@ -103,7 +105,7 @@ lots_of_numbers = "37107287533902102798797998220837590246510135740250
 
 array_of_numbers = lots_of_numbers.split("\n").map {|num_string| num_string.to_i}
 
-sum = array_of_numbers.reduce(:+)
-p sum.to_s[0..9].to_i
+p array_of_numbers.reduce(:+).to_s[0..9].to_i
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 5537376230
