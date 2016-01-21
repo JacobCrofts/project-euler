@@ -9,7 +9,9 @@
 
 # What is the total of all the name scores in the file?
 
-file = "p022_names.txt"
+start_time = Time.now
+
+file = "/Users/jacobcrofts/project-euler/022-names-scores/p022_names.txt"
 
 def letter_value(letter)
   ("A".."Z").to_a.index(letter) + 1
@@ -28,5 +30,6 @@ end
 names.sort!
 
 p names.inject(0) {|sum, name| sum + name_value(name) * names.index(name)}
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 871198282
