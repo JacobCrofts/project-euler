@@ -34,8 +34,8 @@ sequence_lengths = {}
   sequence_lengths[number] = length
 end
 
-p "calculated in #{(Time.now - start_time) * 1000} ms"
 p sequence_lengths.max_by {|key, value| value}.first
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 837799
 
