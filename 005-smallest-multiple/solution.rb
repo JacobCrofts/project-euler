@@ -4,6 +4,7 @@
 # What is the smallest positive number that is evenly
 # divisible by all of the numbers from 1 to 20?
 
+start_time = Time.now
 
 def divisible_by_1_thru_20?(int)
   (11..20).each do |factor|
@@ -19,6 +20,7 @@ until divisible_by_1_thru_20?(counter)
 end
 
 p counter
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 232792560
 
