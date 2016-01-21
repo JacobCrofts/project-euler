@@ -18,47 +18,52 @@
 
 # What is the value of the first triangle number to have over five hundred divisors?
 
+start_time = Time.now
+
 require 'prime'
 
-def prime_factors(integer)
-  return [integer] if integer.prime?
-  factors = []
-  counter = 2
-  until integer % counter == 0
-    counter += 1
+class Integer
+
+  def prime_factors
+    return 0 if self < 2
+    return [self] if self.prime?
+    factors = []
+    counter = 2
+    until self % counter == 0
+      counter += 1
+    end
+    factors << [counter, (self / counter).prime_factors]
+    factors.flatten
   end
-  factors << [counter, prime_factors(integer / counter)]
-  factors.flatten
-end
 
-def number_of_divisors(integer)
-  counts = {}
-  prime_factors(integer).each do |factor|
-    counts[factor] ||= 0
-    counts[factor] += 1
+  def number_of_divisors
+    return 0 if self < 4
+    counts = {}
+    self.prime_factors.each do |factor|
+      counts[factor] ||= 0
+      counts[factor] += 1
+    end
+    counts.each_value.inject(1) {|prod, value| prod * (value + 1)}
   end
-  counts.each_value.inject(1) {|prod, value| prod * (value + 1)}
+
 end
 
-def nth_triangle_number(n)
-  return 1 if n == 1
-  (1..n).reduce(:+)
+triangle_number = 1
+index = 1
+until triangle_number.number_of_divisors > 500
+  index += 1
+  triangle_number += index
 end
 
-n = 2
-until number_of_divisors(nth_triangle_number(n)) > 500
-  n += 1
-end
-
-p nth_triangle_number(n)
+p triangle_number
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 76576500
 
 
-# This takes about 5 seconds to run, so I will try to refactor it later
-# for performance. My original approach was to iterate through (1..integer)
-# and simply count the number of divisors in that range using modulo. It
-# works fine with small numbers, but with larger ones it takes too long to run.
+# My original approach was to iterate through (1..integer) and simply count the
+# number of divisors in that range using modulo. It works fine with small numbers,
+# but with larger ones it takes too long to run.
 
 # The trick here, and I think this puzzle is unsolvable without it, is that
 # if a number's prime factors are listed like this: a^r * b^s * ..., then the
