@@ -6,6 +6,8 @@
 # There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 # Find the product abc.
 
+start_time = Time.now
+
 def pythagorean_triplet?(a, b, c)
   a ** 2 + b ** 2 == c ** 2
 end
@@ -24,6 +26,9 @@ until a == 1000
 end
 
 p pythagorean_triplets[0].reduce(:*)
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 31875000
+
+
 # the triplet itself is [200, 375, 425]
