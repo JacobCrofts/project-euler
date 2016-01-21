@@ -5,6 +5,8 @@
 # Find the largest palindrome made from the product of two
 # 3-digit numbers.
 
+start_time = Time.now
+
 def palindrome?(number)
   number.to_s.reverse == number.to_s
 end
@@ -20,5 +22,6 @@ palindrome_products = []
 end
 
 p palindrome_products.max
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 906609
