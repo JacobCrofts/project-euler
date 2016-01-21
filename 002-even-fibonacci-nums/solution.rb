@@ -1,3 +1,5 @@
+start_time = Time.now
+
 def fib_nums_up_to(max)
   fib_nums = [1, 2]
   until fib_nums[-1] >= max
@@ -10,3 +12,4 @@ fibonacci_nums = fib_nums_up_to(4_000_000)
 even_fibonacci_nums = fibonacci_nums.select! { |val| val.even? }
 
 p even_fibonacci_nums.reduce(:+)
+p "calculated in #{(Time.now - start_time) * 1000} ms"
