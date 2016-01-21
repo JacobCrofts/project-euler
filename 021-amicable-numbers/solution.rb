@@ -1,21 +1,29 @@
-def amicable?(number)
-  sum_of_divisors(sum_of_divisors(number)) == number && sum_of_divisors(number) != number
-end
+start_time = Time.now
 
-def sum_of_divisors(number)
-  divisors = []
-  (1..number / 2).each do |possible_divisor|
-    divisors << possible_divisor if number % possible_divisor == 0
+class Integer
+
+  def amicable?
+    return false if self < 2
+    self.sum_of_divisors.sum_of_divisors == self && self.sum_of_divisors != self
   end
-  divisors.reduce(:+)
+
+  def sum_of_divisors
+    divisors = []
+    (1..self / 2).each do |possible_divisor|
+      divisors << possible_divisor if self % possible_divisor == 0
+    end
+    divisors.reduce(:+)
+  end
+
 end
 
 amicable_numbers = []
 
-(2..9999).each do |possible_amicable|
-  amicable_numbers << possible_amicable if amicable?(possible_amicable)
+(1...10_000).each do |possible_amicable|
+  amicable_numbers << possible_amicable if possible_amicable.amicable?
 end
 
 p amicable_numbers.reduce(:+)
+p "calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 31626
