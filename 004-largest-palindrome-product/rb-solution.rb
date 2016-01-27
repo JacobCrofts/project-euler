@@ -1,10 +1,3 @@
-# A palindromic number reads the same both ways. The largest
-# palindrome made from the product of two 2-digit numbers is
-# 9009 = 91 × 99.
-
-# Find the largest palindrome made from the product of two
-# 3-digit numbers.
-
 start_time = Time.now
 
 def palindrome?(number)
@@ -23,5 +16,3 @@ end
 
 p palindrome_products.max
 p "calculated in #{(Time.now - start_time) * 1000} ms"
-
-# => 906609
