@@ -1,8 +1,14 @@
 var fibonacciSequence = [1, 2]
 
-for (var counter = 1; fibonacciSequence[-1] < 20; counter++) {
-  console.log(fibonacciSequence[counter])
-  fibonacciSequence.push(fibonacciSequence[counter] + fibonacciSequence[counter - 1]);
+var counter = 0;
+var evenFibonacciCount = 2;
+
+while (fibonacciSequence[fibonacciSequence.length - 1] < 4000000) {
+  var nextTerm = fibonacciSequence[fibonacciSequence.length - 2] + fibonacciSequence[fibonacciSequence.length - 1];
+  fibonacciSequence.push(nextTerm);
+  if (nextTerm % 2 == 0) {
+    evenFibonacciCount += nextTerm;
+  }
 }
 
-// console.log(fibonacciSequence)
+console.log(evenFibonacciCount);
