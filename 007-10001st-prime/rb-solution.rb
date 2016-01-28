@@ -1,8 +1,3 @@
-# By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13,
-# we can see that the 6th prime is 13.
-
-# What is the 10,001st prime number?
-
 start_time = Time.now
 
 def prime?(number)
@@ -26,7 +21,6 @@ end
 p first_n_primes(10001).last
 p "calculated in #{(Time.now - start_time) * 1000} ms"
 
-# => 104743
 
 
 # This may be solved very quickly and in only two lines if we use the Prime class:
