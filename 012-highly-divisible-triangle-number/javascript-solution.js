@@ -8,8 +8,12 @@ isPrime = function(number) {
 }
 
 primeFactors = function(number) {
+  if (number < 2) {
+    return [];
+  }
+
   if (isPrime(number)) {
-    return number;
+    return [number];
   }
 
   for (var counter = 2; counter <= number; counter++) {
@@ -19,7 +23,6 @@ primeFactors = function(number) {
   }
 }
 
-// warning: returns NaN for non-integer input
 Array.prototype.flatten = function() {
   return this.join(',').split(',').map(function(element) {
     return parseInt(element);
@@ -37,11 +40,23 @@ Array.prototype.count = function(number) {
 }
 
 numberOfdivisors = function(number) {
-  var facs = primeFactors(number).flatten();
-  facs = facs.filter(function(element, index) {
-    return (facs.slice(index, Infinity).count(element) == 1);
+  var factors = primeFactors(number).flatten();
+  uniqueFactors = factors.filter(function(element, index) {
+    return (factors.slice(index, Infinity).count(element) == 1);
   })
-  return facs;
+  product = 1;
+  uniqueFactors.forEach(function(element) {
+    product *= (factors.count(element) + 1)
+  })
+  return product;
 }
 
-console.log(numberOfdivisors(60));
+var triangleNumber = 1;
+var nextIncrement = 2;
+
+while (numberOfdivisors(triangleNumber) < 500) {
+  triangleNumber += nextIncrement;
+  nextIncrement++;
+}
+
+console.log(triangleNumber);

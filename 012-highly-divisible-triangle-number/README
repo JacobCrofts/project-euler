@@ -15,3 +15,10 @@ Let us list the factors of the first seven triangle numbers:
 We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
+
+Solution: 76576500
+
+
+The trick here, and I think this puzzle is unsolvable without it, is that if a number's prime factors are listed like this: a^r * b^s * ..., then the number of divisors for the number is (r + 1) * (s + 1) * ... . For example, the prime factors of 60 are 2, 2, 3, and 5. This may be written as 2^2 * 3^1 * 5^1, and the number of divisors for 60 is (2 + 1)(1 + 1)(1 + 1) = 12. Using this information, I was able to calculate the number of divisors for a given number very quickly.
+
+Credit to http://mathschallenge.net/library/number/number_of_divisors for an explanation and proof of this theorem.
