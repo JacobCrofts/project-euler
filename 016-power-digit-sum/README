@@ -1,0 +1,7 @@
+2^15 = 32768 and the sum of its digits is 3 + 2 + 7 + 6 + 8 = 26.
+
+What is the sum of the digits of the number 2^1000?
+
+Solution: 1366
+
+Since Ruby was my first language, I was lulled into a false sense of security when I first solved this problem. It's not so easy in JavaScript! I learned that since JS (and many other languages) may store precise values only up to a limited amount, I cannot simply declare a "bigNum" variable equal to 2 ^ 1000 and operate on it as I did in Ruby. Instead, I wrote a method manually that manually adds strings, much as a person might do by hand. There are many "big number" libraries designed to make problems like this much easier when we deal with big numbers in the professional world.
