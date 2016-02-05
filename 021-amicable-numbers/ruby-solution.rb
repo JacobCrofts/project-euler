@@ -25,5 +25,3 @@ end
 
 p amicable_numbers.reduce(:+)
 p "calculated in #{(Time.now - start_time) * 1000} ms"
-
-# => 31626

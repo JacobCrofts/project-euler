@@ -1,0 +1,7 @@
+Let d(n) be defined as the sum of the proper divisors of n.
+
+If d(a) = b and d(b) = a where a != b, then a and be are an amicable pair and each of a and b are called amicable numbers.
+
+Find the sum of all amicable numbers under 10,000.
+
+Solution: 31626
