@@ -1,28 +1,44 @@
-def abundant?(number)
-  divisors = []
-  (1..number / 2).each do |possible_divisor|
-    divisors << possible_divisor if number / possible_divisor == number.to_f / possible_divisor
+start_time = Time.now
+
+require 'prime'
+
+class Integer
+
+  def sum_of_divisors
+    divisors = [0]
+    sqrt = Math.sqrt(self)
+    (2..sqrt).each do |possible_divisor|
+      if self % possible_divisor == 0
+        divisors << possible_divisor
+        unless possible_divisor == sqrt
+          divisors << self / possible_divisor
+        end
+      end
+    end
+    divisors.reduce(:+) + 1
   end
-  divisors.reduce(:+) > number
+
+  def abundant?
+    self.sum_of_divisors > self
+  end
+
 end
 
 abundant_numbers = []
 sums = []
 
-(12..28123).each do |possible_abundant|
-  abundant_numbers << possible_abundant if abundant?(possible_abundant)
+(1..28123).each do |possible_abundant|
+  abundant_numbers << possible_abundant if possible_abundant.abundant?
 end
 
 abundant_numbers.each do |ab_num|
   abundant_numbers.each do |other_ab_num|
+    break if other_ab_num > ab_num
     sums << ab_num + other_ab_num
   end
 end
 
 p ((1..28123).to_a - sums).reduce(:+)
+p "Calculated in #{(Time.now - start_time) * 1000} ms"
 
 # => 4179871
-
-# This solution has the longest runtime of any euler problem I have solved, at around 40 seconds.
-# Perhaps there's a better way of handling this. My code spends far more time trying to calculate
-# a number's divisors than on anything else.

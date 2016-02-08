@@ -16,18 +16,29 @@ isAbundant = function(number) {
 }
 
 var abundantNumbers = [];
+var nonAbundantSums = [];
 
-for (var counter = 12; counter <= 28123; counter++) {
+for (var counter = 1; counter <= 28123; counter++) {
   if (isAbundant(counter)) {
     abundantNumbers.push(counter);
   }
+  nonAbundantSums.push(counter);
 }
 
-var abundantSums = [];
+// console.log(abundantNumbers.length)
+// console.log(nonAbundantSums.length)
 
 abundantNumbers.forEach(function(abundantNumber) {
   abundantNumbers.forEach(function(otherAbundantNumber) {
-    abundantSums.push(abundantNumber + otherAbundantNumber);
+    nonAbundantSums.splice(abundantNumber + otherAbundantNumber, 1)
   })
+  // for (var counter = 0; counter < index; counter++) {
+  //   nonAbundantSums.splice(abundantNumber + abundantNumbers[counter], 1)
+  // }
 })
 
+var sumOfSums = nonAbundantSums.reduce(function(sum, element) {
+  return sum + element;
+})
+
+console.log(sumOfSums);
