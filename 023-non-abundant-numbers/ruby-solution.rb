@@ -1,7 +1,5 @@
 start_time = Time.now
 
-require 'prime'
-
 class Integer
 
   def sum_of_divisors
@@ -31,14 +29,14 @@ sums = []
   abundant_numbers << possible_abundant if possible_abundant.abundant?
 end
 
-abundant_numbers.each do |ab_num|
-  abundant_numbers.each do |other_ab_num|
-    break if other_ab_num > ab_num
-    sums << ab_num + other_ab_num
+abundant_numbers.each_with_index do |ab_num, index|
+  counter = 0
+  while counter <= index
+    sums << ab_num + abundant_numbers[counter]
+    counter += 1
   end
 end
 
+# p sums.length
 p ((1..28123).to_a - sums).reduce(:+)
 p "Calculated in #{(Time.now - start_time) * 1000} ms"
-
-# => 4179871
