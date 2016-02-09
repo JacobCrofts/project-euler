@@ -1,3 +1,5 @@
+// note: solution is not finished
+
 sumOfDivisors = function(number) {
   var sum = 0;
   for (var counter = 2; counter <= Math.sqrt(number); counter++) {
@@ -16,29 +18,29 @@ isAbundant = function(number) {
 }
 
 var abundantNumbers = [];
-var nonAbundantSums = [];
+var abundantSums = [];
+var integersInRange = [];
 
 for (var counter = 1; counter <= 28123; counter++) {
   if (isAbundant(counter)) {
     abundantNumbers.push(counter);
   }
-  nonAbundantSums.push(counter);
+  integersInRange.push(counter);
 }
 
-// console.log(abundantNumbers.length)
-// console.log(nonAbundantSums.length)
+// correct through this point
 
-abundantNumbers.forEach(function(abundantNumber) {
-  abundantNumbers.forEach(function(otherAbundantNumber) {
-    nonAbundantSums.splice(abundantNumber + otherAbundantNumber, 1)
-  })
-  // for (var counter = 0; counter < index; counter++) {
-  //   nonAbundantSums.splice(abundantNumber + abundantNumbers[counter], 1)
-  // }
-})
+// abundantNumbers.forEach(function(abundantNumber, index) {
+//   for (var counter = 0; counter <= index; counter++) {
+//     var sum = abundantNumber + abundantNumbers[counter];
+//     abundantSums.push(sum);
+//   }
+// })
 
-var sumOfSums = nonAbundantSums.reduce(function(sum, element) {
-  return sum + element;
-})
+// console.log(abundantSums.length)
 
-console.log(sumOfSums);
+// var sumOfSums = nonAbundantSums.reduce(function(sum, element) {
+//   return sum + element;
+// })
+
+// console.log(sumOfSums);
