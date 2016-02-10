@@ -37,6 +37,5 @@ abundant_numbers.each_with_index do |ab_num, index|
   end
 end
 
-# p sums.length
 p ((1..28123).to_a - sums).reduce(:+)
 p "Calculated in #{(Time.now - start_time) * 1000} ms"
