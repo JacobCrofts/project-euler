@@ -35,16 +35,17 @@ String.prototype.addNumerically = function(otherString) {
   return sum.reverse().join('');
 }
 
-// console.log('8'.addNumerically('5'))
+// console.log('88888888'.addNumerically('555555555'))
+// console.log(88888888 + 555555555)
 
-var lastTwoFibonaccis = ['1', '1'];
+// var lastTwoFibonaccis = ['1', '1'];
 
-for (var fibIndex = 1; fibIndex < 20; fibIndex++) {
-  var nextFib = lastTwoFibonaccis[0].addNumerically(lastTwoFibonaccis[1])
-  lastTwoFibonaccis[0] = lastTwoFibonaccis[1];
-  lastTwoFibonaccis[1] = nextFib.toString();
-  console.log(nextFib)
-}
+// for (var fibIndex = 2; lastTwoFibonaccis[1].length < 1000; fibIndex++) {
+//   var nextFib = lastTwoFibonaccis[0].addNumerically(lastTwoFibonaccis[1]);
+//   lastTwoFibonaccis[0] = lastTwoFibonaccis[1];
+//   lastTwoFibonaccis[1] = nextFib;
+//   // console.log(nextFib)
+// }
 
-// console.log(lastTwoFibonaccis[1]);
+// // console.log(lastTwoFibonaccis[1]);
 // console.log(fibIndex);
