@@ -1,11 +1,7 @@
-last_two = [1, 1]
-fib_index = 2
+fibonacci = [1, 1]
 
-while last_two[1].to_s.length < 1000
-  next_fib = last_two.reduce(:+)
-  fib_index += 1
-  last_two[0] = last_two[1]
-  last_two[1] = next_fib
+while fibonacci.last.to_s.length < 1000
+  fibonacci << fibonacci[-1] + fibonacci[-2]
 end
 
-p fib_index
+p fibonacci.length
