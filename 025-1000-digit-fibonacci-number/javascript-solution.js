@@ -17,35 +17,25 @@ String.prototype.addNumerically = function(otherString) {
     sum.push(parseInt(topDigit) + bottomDigit);
   })
 
-  // console.log(sum)
-
   sum = sum.reverse();
 
   sum.forEach(function(digit, index) {
     var digits = digit.toString().split('');
     if (digits.length > 1) {
       sum[index] = digits[1];
-      // console.log(sum[index + 1])
       var existingDigit = sum[index + 1] || '0'
       sum[index + 1] = parseInt(existingDigit) + parseInt(digits[0]);
     }
   });
 
-  // console.log(sum)
   return sum.reverse().join('');
 }
 
-// console.log('88888888'.addNumerically('555555555'))
-// console.log(88888888 + 555555555)
+var fibonaccis = ['1', '1'];
 
-// var lastTwoFibonaccis = ['1', '1'];
+while (fibonaccis[fibonaccis.length - 1].length < 1000) {
+  var last = fibonaccis.length - 1;
+  fibonaccis.push(fibonaccis[last].addNumerically(fibonaccis[last - 1]));
+}
 
-// for (var fibIndex = 2; lastTwoFibonaccis[1].length < 1000; fibIndex++) {
-//   var nextFib = lastTwoFibonaccis[0].addNumerically(lastTwoFibonaccis[1]);
-//   lastTwoFibonaccis[0] = lastTwoFibonaccis[1];
-//   lastTwoFibonaccis[1] = nextFib;
-//   // console.log(nextFib)
-// }
-
-// // console.log(lastTwoFibonaccis[1]);
-// console.log(fibIndex);
+console.log(fibonaccis.length);
