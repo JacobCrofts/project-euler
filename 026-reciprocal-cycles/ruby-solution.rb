@@ -1,32 +1,27 @@
-def repeating_decimal_sequence(one_over_this)
-  quotient = ""
-  dividends = [1]
+def repeating_decimal_sequence_length(divisor)
+  dividends = {}
+  decimal_sequence = ''
+  current_dividend = 10
+  start_index = nil
 
-  dividend = 1
-  divisor = one_over_this
-
-  until dividends.uniq != dividends
-    quotient << (dividend / divisor).to_s
-    dividend = ((dividend - divisor * quotient[-1].to_i).to_s + "0").to_i
-    dividends << [dividend]
+  until dividends[current_dividend]
+    decimal_sequence += (current_dividend / divisor).to_s
+    dividends[current_dividend] = true
+    current_dividend = (current_dividend % divisor) * 10
   end
 
-  start_index = dividends.find_index(dividends[-1])
+  start_index = dividends.keys.index(current_dividend)
 
-  return "" if quotient[start_index..-1] == "0"
-  quotient[start_index..-1]
+  decimal_sequence[start_index..-1].length
 end
 
-sequences = {}
+max_sequence_length = {0 => 0}
 
-(1..999).each do |denominator|
-  sequences[denominator] = repeating_decimal_sequence(denominator).length
+(1...1000).each do |divisor|
+  next_sequence_length = repeating_decimal_sequence_length(divisor)
+  if next_sequence_length > max_sequence_length.values.first
+    max_sequence_length = {divisor => next_sequence_length}
+  end
 end
 
-max_pair = [0, 0]
-
-sequences.each do |key, value|
-  max_pair = [key, value] if value > max_pair[-1]
-end
-
-p max_pair[0]
+p max_sequence_length.keys.first
