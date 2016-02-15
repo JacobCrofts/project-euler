@@ -16,7 +16,7 @@ number_of_consecutive_primes = {}
 
 combos.each do |combo|
   counter = 0
-  until !f(combo[0], combo[1], counter).prime?
+  while f(combo[0], combo[1], counter).prime?
     counter += 1
   end
   number_of_consecutive_primes[combo] = counter
@@ -25,6 +25,3 @@ end
 best_combo = number_of_consecutive_primes.max_by{ |combo, num_of_primes| num_of_primes}
 
 p best_combo.first.reduce(:*)
-
-# => -59231
-# The equation we're looking for is n² - 61n + 971 and the number of primes is 71.
