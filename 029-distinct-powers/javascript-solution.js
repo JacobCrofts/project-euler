@@ -1,6 +1,9 @@
-exponentiateStrings = function(string1, string2) {
-  // must have a powers function for strings because 100 ** 100 is too high for JS...
-}
+require("../custom-methods")
+
+
+// exponentiateStrings = function(string1, string2) {
+//   // must have a powers function for strings because 100 ** 100 is too high for JS...
+// }
 
 // var powers = [];
 
