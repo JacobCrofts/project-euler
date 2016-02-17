@@ -1,26 +1,25 @@
 require("../custom-methods")
 
+var powers = [];
 
-// exponentiateStrings = function(string1, string2) {
-//   // must have a powers function for strings because 100 ** 100 is too high for JS...
-// }
+for (var a = 2; a <= 100; a++) {
+  for (var b = 2; b <= 100; b++) {
+    var powerFactors = [];
+    for (var counter = 1; counter <= b; counter++) {
+      powerFactors.push(a.primeFactors())
+    }
+    powers.push(powerFactors.join(',').split(',').sort());
+  }
+}
 
-// var powers = [];
+var distinctPowers = [];
+var usedPowers = {};
 
-// for (var a = 2; a <= 100; a++) {
-//   for (var b = 2; b <= 100; b++) {
-//     powers.push(exponentiateStrings(a.toString(), b.toString()));
-//   }
-// }
+powers.forEach(function(power) {
+  if (!usedPowers[power]) {
+    distinctPowers.push(power);
+  }
+  usedPowers[power] = true;
+})
 
-// var distinctPowers = [];
-// var usedPowers = {};
-
-// powers.forEach(function(power) {
-//   if (!usedPowers[power]) {
-//     distinctPowers.push(power);
-//   }
-//   usedPowers[power] = true;
-// })
-
-// console.log(distinctPowers.length);
+console.log(distinctPowers.length);
