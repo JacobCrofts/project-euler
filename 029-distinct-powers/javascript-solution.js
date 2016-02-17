@@ -6,7 +6,7 @@ for (var a = 2; a <= 100; a++) {
   for (var b = 2; b <= 100; b++) {
     var powerFactors = [];
     for (var counter = 1; counter <= b; counter++) {
-      powerFactors.push(a.primeFactors())
+      powerFactors.push(a.primeFactors());
     }
     powers.push(powerFactors.join(',').split(',').sort());
   }
