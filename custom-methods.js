@@ -76,3 +76,38 @@ Number.prototype.primeFactors = function() {
 //   }
 //   return product;
 // }
+
+// combinations = function(options, length) {
+//   if (typeof options[0] != "object") {
+//     options = options.map(function(e) {
+//       return [e];
+//     })
+//   }
+//   if (length == 1) {
+//     return options;
+//   }
+//   var combos = [];
+//   for (var currentIndex = 0; currentIndex < length; currentIndex++) {
+//     for (var otherIndex = currentIndex; otherIndex < length; otherIndex++) {
+//       // options is an array of arrays...
+//       var nextOption = options[currentIndex];
+//       nextOption.push(options[otherIndex]);
+//       combos.push(nextOption);
+//     }
+//   }
+//   return combinations(combos, length - 1);
+// }
+
+// function getCombinations(chars) {
+//   var result = [];
+//   var f = function(prefix, chars) {
+//     for (var i = 0; i < chars.length; i++) {
+//       result.push(prefix + chars[i]);
+//       f(prefix + chars[i], chars.slice(i + 1));
+//     }
+//   }
+//   f('', chars);
+//   return result;
+// }
+
+// console.log(getCombinations([1, 22, 3]))
